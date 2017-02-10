@@ -95,8 +95,8 @@ After refining the generation of data through randomizing data selection and aug
 
 ####3. Creation of the Training Set & Training Process
 
-I only utilized Udacity's provided data and did not collect any additional data. I outlined how I augmented and created the data set in **4. Appropriate training data**. Many of the previous sections answer this section.
+I only utilized Udacity's provided data and did not collect any additional data. I outlined how I augmented and created the data set in **4. Appropriate training data**. Many of the previous sections answer this section. Aside from utilizing the data creation process I mentioned in previous sections I also had to modify drive.py to do resize the image when I ran my model in the simulator. 
 
 
 ### Videos
-I've recorded a video of my car going through track 1 and track 2 in my the main directory of my project.
+I've recorded a video of my car going through track 1 and track 2 in my the main directory of my project. For track 1 I kept the drive.py throttle at 0.2, but since track 2 had more hills I bumped it up to 0.3.
