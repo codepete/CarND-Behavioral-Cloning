@@ -13,7 +13,9 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./images/Nvidia_Architecture.PNG "Model Visualization"
-
+[image2]: ./images/ranom_images.PNG "Random Images from Data Set"
+[image3]: ./images/distribution_of_non_augment.PNG "Distribution of Steering Angles from Non-Augmented Data Set"
+[image4]: ./images/distribution_of_augment.PNG "Distribution of Steering Angles from Augmented Data Set"
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
 
@@ -34,7 +36,7 @@ Using the Udacity provided simulator and my drive.py file, the car can be driven
 python drive.py model.h5
 ```
 
-####3. Submssion code is usable and readable
+####3. Submission code is usable and readable
 
 The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
@@ -60,6 +62,15 @@ The model utilized the adam optimizer where I manually set the learning rate to 
 
 ####4. Appropriate training data
 
+Example Data with Steering Angles:
+![image2]
+
+Fig 1. Steering Angle Distribution of Non-Augmented Data
+![image3]
+
+Fig 2. Steering Angle Distribution of Augmented Data
+![image4]
+
 I saw that many students were able to utilize only the provided data to fully train their models. I wanted to make this my goal. However, this isn't possible without augmenting the data. Many suggested techniques mentioned in https://chatbotslife.com/using-augmentation-to-mimic-human-driving-496b569760a9#.yfybvx6fg. I utilized the horizontal/vertical shifting and randomization of brightness techniques mentioned in the article.
 
 I first pulled all the data from the CSV file and loaded it into a list (**get_training_data**). I then created a second method called **generate_training_data** that would accept an arbitrary number of data points to generate. This method utilized a randomizer that would pick X amount of data points from the list provided by Udacity. Each row contains a steering angle and array of references to left, middle, and right images provided by the simulator training data. Since there was no way my computer could handle loading this much data into memory I had to utilize generators to create batches for training.
@@ -73,9 +84,10 @@ When a batch is requested we do the following:
 - Randomly shifted the images left or right by a range 50 pixels and up and down by a range of 20 pixels. For each pixel shift we would correct the steering by 0.0004 per pixel.
 - Resized images to 66x200x3 to match Nvidia model input size
 
-This ensured that the model would not overfit. This was definitely a problem with the data set by iteslf - there was a lot of steering angles that were close to 0. My shifting our images left/right/up/down we introduced more variance in steering angles making our model more capable of handling hills and turns.
+This ensured that the model would not overfit. This was definitely a problem with the data set by iteslf - there was a lot of steering angles that were close to 0 (Fig. 1). By shifting our images left/right/up/down we introduced more variance in steering angles making our model more capable of handling hills and turns (Fig. 2).
 
 Also by utilizing both left and right images from the simulator we could better train our models on how to correct itself when it was going off or pointing off track.
+
 
 ###Model Architecture and Training Strategy
 
@@ -95,7 +107,7 @@ After refining the generation of data through randomizing data selection and aug
 
 ####3. Creation of the Training Set & Training Process
 
-I only utilized Udacity's provided data and did not collect any additional data. I outlined how I augmented and created the data set in **4. Appropriate training data**. Many of the previous sections answer this section. Aside from utilizing the data creation process I mentioned in previous sections I also had to modify drive.py to do resize the image when I ran my model in the simulator. 
+I only utilized Udacity's provided data and did not collect any additional data. I outlined how I augmented and created the data set in **4. Appropriate training data**. Many of the previous sections answer this section. Aside from utilizing the data creation process I mentioned in previous sections I also had to modify drive.py to do resize the image when I ran my model in the simulator.
 
 
 ### Videos
