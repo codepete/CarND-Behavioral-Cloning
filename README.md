@@ -50,9 +50,9 @@ For my model architecture I based my model off of Nvidia's "End to End Learning 
 
 The model contains a dropout of 0.5 at the very last convolution layer in order to reduce overfitting.
 
-I made it a personal challenge to only use the data provided by the project; however, the data set isn't large enough by itself. to ensure I provided data set that had enough variance I utilized augmentation techniques; horizontal/vertical shifting, vertical flipping of image, and randomization of brightness. This ensured that my model was not overfitting and provided much more data for the model to train on.
+I made it a personal challenge to only use the data provided by the project; however, the data set isn't large enough by itself. To ensure that I provided a data set that had enough variance I utilized augmentation techniques; horizontal/vertical shifting, vertical flipping of image, and randomization of brightness. This ensured that my model was not overfitting and provided much more data for the model to train on.
 
-After realizing that low loss and validation loss values didn't actually provide an indicator to how well the car would make it around the track it was essential that I tested my model on the track after training.
+After realizing that low loss and validation loss values didn't actually provide an indicator to how well the car would make it around the track, it was essential that I tested my model on the track after training.
 
 ####3. Model parameter tuning
 
@@ -60,9 +60,9 @@ The model utilized the adam optimizer where I manually set the learning rate to 
 
 ####4. Appropriate training data
 
-Since I saw that many students were able to utilize the data provided by Udacity to fully train their model I wanted to make this my goal. However, this isn't possible without augmenting the data. Many suggested techniques mentioned in https://chatbotslife.com/using-augmentation-to-mimic-human-driving-496b569760a9#.yfybvx6fg. I utilized the horizontal/vertical shifting and randomization of brightness techniques mentioned in the article.
+I saw that many students were able to utilize only the provided data to fully train their models. I wanted to make this my goal. However, this isn't possible without augmenting the data. Many suggested techniques mentioned in https://chatbotslife.com/using-augmentation-to-mimic-human-driving-496b569760a9#.yfybvx6fg. I utilized the horizontal/vertical shifting and randomization of brightness techniques mentioned in the article.
 
-I first pulled all the data from the CSV file and loaded it into a list (**get_training_data**). I then created a second method called **generate_training_data** that would accept an arbitrary number of data points to generate. This method utilized a randomizer that would select pick X amount of data points from the list provided by Udacity. Each row contains steering angle and array of references to left, middle, and right images provided by the simulator training data. Since there was no way my computer could handle loading this much data into memory I had to utilize generators to create batches for training.
+I first pulled all the data from the CSV file and loaded it into a list (**get_training_data**). I then created a second method called **generate_training_data** that would accept an arbitrary number of data points to generate. This method utilized a randomizer that would pick X amount of data points from the list provided by Udacity. Each row contains a steering angle and array of references to left, middle, and right images provided by the simulator training data. Since there was no way my computer could handle loading this much data into memory I had to utilize generators to create batches for training.
 
 When a batch is requested we do the following:
 - Shuffle the data
@@ -70,7 +70,7 @@ When a batch is requested we do the following:
 - Add steering correction of 0.25 to left images and -0.25 to right images (same angle for center)
 - Gave 50% probability that the image would be flipped on the vertical axis
 - Randomly changed the brightness of the images
-- Randomly shifted the images left or right by a range 50 pixels and up and down by 20 pixels. For each pixel shift we would correct the steering by 0.0004 per pixel.
+- Randomly shifted the images left or right by a range 50 pixels and up and down by a range of 20 pixels. For each pixel shift we would correct the steering by 0.0004 per pixel.
 - Resized images to 66x200x3 to match Nvidia model input size
 
 This ensured that the model would not overfit. This was definitely a problem with the data set by iteslf - there was a lot of steering angles that were close to 0. My shifting our images left/right/up/down we introduced more variance in steering angles making our model more capable of handling hills and turns.
