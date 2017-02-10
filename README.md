@@ -13,7 +13,7 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./images/Nvidia_Architecture.PNG "Model Visualization"
-[image2]: ./images/ranom_images.PNG "Random Images from Data Set"
+[image2]: ./images/random_images.PNG "Random Images from Data Set"
 [image3]: ./images/distribution_of_non_augment.PNG "Distribution of Steering Angles from Non-Augmented Data Set"
 [image4]: ./images/distribution_of_augment.PNG "Distribution of Steering Angles from Augmented Data Set"
 ## Rubric Points
