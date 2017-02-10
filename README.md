@@ -12,7 +12,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./images/Nvidia_Architecture.png "Model Visualization"
+[image1]: ./images/Nvidia_Architecture.PNG "Model Visualization"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -42,7 +42,7 @@ The model.py file contains the code for training and saving the convolution neur
 
 ####1. An appropriate model architecture has been employed
 
-![alt text][image1]
+![image1]
 
 For my model architecture I based my model off of Nvidia's "End to End Learning for Self-Driving Cars" whitepaper to train my car to drive in the simulator. However, what the diagram doesn't show you is that that after every convolution layer I added relu activation function and added subsampling. After 5 layers of convolution I added a dropout of 0.5 to provide overfitting of data. In the 4 fully-connected layers I added relu activation. I also normalize the data between -0.5 and 0.5.
 
